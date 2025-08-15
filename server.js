@@ -26,9 +26,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/usuarios", async (req, res) => {
-  const snapshot = await db.collection("usuarios").get();
-  const usuarios = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  res.json(usuarios);
+  try {
+    const snapshot = await db.collection("usuarios").get();
+    const usuarios = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    res.json(usuarios);
+  } catch (error) {
+    console.error("Error obteniendo usuarios:", error);
+    res.status(500).json({ error: "Error obteniendo usuarios" });
+  }
 });
 
 app.post("/usuarios", async (req, res) => {
