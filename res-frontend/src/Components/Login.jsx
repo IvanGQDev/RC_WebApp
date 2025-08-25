@@ -1,4 +1,5 @@
 import React from 'react';
+
 // npm run dev
 // npm start
 
@@ -7,8 +8,6 @@ import React from 'react';
 const Login = ({ setIsLoggedIn }) => {
   const [user, setUser] = React.useState({ username: "", password: "" });
   const [error, setError] = React.useState("");
-
-  
   const validUser = { username: "admin", password: "admin123" };
 
   const handleLogin = (e) => {
@@ -23,7 +22,7 @@ const Login = ({ setIsLoggedIn }) => {
   };
 
   return (
-    // Background image for the login page
+    // Imagen de fondo
     <div 
       className="flex flex-col justify-center min-h-screen"
       style={{
@@ -33,20 +32,20 @@ const Login = ({ setIsLoggedIn }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Login form container*/}
+      {/* Login Contenedor*/}
       <div className='flex flex-col ml-14'>
         <form
         onSubmit={handleLogin}
         className="flex flex-col justify-center bg-neutral-900/80 rounded-2xl shadow-md 
              w-11/12 sm:w-96 text-white h-[450px] p-8 sm:p-12 space-y-6"
       > 
-        {/* Title */}
+        {/* Titulo */}
         <div className="mb-4">
           <h2 className="text-center text-4xl">Bienvenido a</h2>
           <h2 className="text-center text-4xl text-blue-400">Conflikta</h2>
         </div>
 
-        {/* Input fields for username and password */}
+        {/* Inputs para username y password */}
         <input
           type="text"
           placeholder="Usuario"
@@ -67,7 +66,7 @@ const Login = ({ setIsLoggedIn }) => {
 
         {error && <p className="text-red-500 text-center">{error}</p>}
         
-        {/* Submit button */}
+        {/* Boton de enviar */}
         <button
           type="submit"
           className="bg-blue-500 text-white py-1.5 px-4 rounded-2xl hover:bg-blue-600 " 
