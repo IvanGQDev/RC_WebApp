@@ -1,10 +1,5 @@
 import React from 'react';
 
-// npm run dev
-// npm start
-
-// This is the login component
-// It will handle user login and set the isLoggedIn state in App.jsx
 const Login = ({ setIsLoggedIn }) => {
   const [user, setUser] = React.useState({ username: "", password: "" });
   const [error, setError] = React.useState("");

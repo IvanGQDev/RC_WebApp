@@ -8,7 +8,7 @@ import {
 } from "recharts";
 
 const DayResults = ({ dayNumber, situaciones, puntaje, intentos }) => {
-  // Test data
+
   const tiempoData = situaciones.map((s, idx) => ({
     situacion: `#${idx + 1}`,
     tiempo: s.tiempo,

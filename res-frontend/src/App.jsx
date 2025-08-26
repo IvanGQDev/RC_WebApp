@@ -11,7 +11,7 @@ function App() {
   const[isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
-    // if sesion exists, set isLoggedIn to true
+    // Manejo de sesion
     const token = localStorage.getItem('token');
     if(token) {
       setIsLoggedIn(true);

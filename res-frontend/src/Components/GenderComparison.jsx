@@ -31,7 +31,11 @@ const GenderComparison = ({ data }) => {
             <LabelList dataKey="puntaje" position="top" />
           </Bar>
           <Bar dataKey="tiempo" fill="#818cf8" name="Tiempo Prom. (s)">
-            <LabelList dataKey="tiempo" position="top" />
+            <LabelList 
+              dataKey="tiempo" 
+              position="top" 
+              formatter={(value) => value.toFixed(4)} 
+            />
           </Bar>
         </BarChart>
       </ResponsiveContainer>

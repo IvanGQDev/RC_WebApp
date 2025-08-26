@@ -1,65 +1,57 @@
-import React from "react";
-import TopUsersTime from "./TopUsersTime";
+import React, { useEffect, useState } from "react";
+import { getUsuarios, calcularEstadisticasHome } from "../services/userService";
 import TopUsersScore from "./TopUsersScore";
-import {
-  Users,
-  BarChart2,
-  Clock,
-  Gauge,
-  Smile,
-} from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-
-// Test
-const topUsuarios = [
-  { nombre: "Luis", puntaje: 1992 },
-  { nombre: "Alex", puntaje: 1120 },
-  { nombre: "Ana", puntaje: 1023 },
-  { nombre: "Omar", puntaje: 840 },
-  { nombre: "Sofía", puntaje: 773 },
-];
-
-const stats = {
-  totalUsuarios: 35,
-  promedioPuntaje: 880.4,
-  tiempoPromedio: 3.24,
-  porcentajeAprobados: 68.5,
-};
-
-const topUsuariosPorTiempo = [
-    { nombre: "Luis", tiempoPromedio: 1.92 },
-    { nombre: "Ana", tiempoPromedio: 2.15 },
-    { nombre: "Alex", tiempoPromedio: 2.40 },
-    { nombre: "Omar", tiempoPromedio: 2.95 },
-    { nombre: "Sofía", tiempoPromedio: 3.12 },
-];
-
+import TopUsersTime from "./TopUsersTime";
+import { Users, BarChart2, Clock, Smile } from "lucide-react";
 
 const Home = () => {
-    
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({});
+  const [topScore, setTopScore] = useState([]);
+  const [topTiempo, setTopTiempo] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUsuarios();
+        const { stats, topScore, topTiempo } = calcularEstadisticasHome(data);
+        setStats(stats);
+        setTopScore(topScore);
+        setTopTiempo(topTiempo);
+      } catch (error) {
+        console.error("Error al obtener usuarios:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <p className="p-8 text-gray-600">Cargando...</p>;
+
   return (
-    <div className="w-full h-full p-8 bg-gray-50 rounded-xl">
-      {/* Título */}
+    <div className="w-full h-full p-8 bg-gray-50 rounded-xl min-h-screen">
+      {/* encabezado */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-800">¡Bienvenido al Panel General!</h1>
         <p className="text-gray-500 text-sm mt-1">Resumen de datos recolectados por los participantes</p>
       </div>
 
-      {/* Cards de estadisticas */}
+      {/* Estadísticas */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <Card title="Usuarios" icon={<Users className="text-blue-500" />} value={stats.totalUsuarios} />
-        <Card title="Prom. Puntaje" icon={<BarChart2 className="text-green-500" />} value={`${stats.promedioPuntaje.toFixed(1)} pts`} />
-        <Card title="Tiempo Promedio" icon={<Clock className="text-purple-500" />} value={`${stats.tiempoPromedio.toFixed(2)}s`} />
-        <Card title="Aprobados" icon={<Smile className="text-yellow-500" />} value={`${stats.porcentajeAprobados.toFixed(1)}%`} />
+        <Card title="Prom. Puntaje" icon={<BarChart2 className="text-green-500" />} value={`${stats.promedioPuntaje?.toFixed(1)} pts`} />
+        <Card title="Tiempo Promedio" icon={<Clock className="text-purple-500" />} value={`${stats.tiempoPromedio?.toFixed(2)}s`} />
+        <Card title="Aprobados" icon={<Smile className="text-yellow-500" />} value={`${stats.porcentajeAprobados?.toFixed(1)}%`} />
       </div>
 
       {/* Gráficos */}
-      <div className="flex flex-col  gap-1">
-        <TopUsersScore title="Top 5 Usuarios por Puntaje" data={topUsuarios} />
-        <TopUsersTime data={topUsuariosPorTiempo} />
+      <div className="flex flex-col gap-4">
+        <TopUsersScore title="Top 5 Usuarios por Puntaje" data={topScore} />
+        <TopUsersTime data={topTiempo} />
       </div>
     </div>
-    
   );
 };
 

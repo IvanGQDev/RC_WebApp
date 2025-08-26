@@ -7,9 +7,18 @@ const TopUsersTime = ({ data }) => {
       <div className="w-full h-64">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" margin={{ left: 40, right: 20 }}>
-            <XAxis type="number" domain={['dataMin - 0.5', 'dataMax + 0.5']} unit="s" />
-            <YAxis dataKey="nombre" type="category" />
-            <Tooltip formatter={(value) => `${value.toFixed(2)} segundos`} />
+            <XAxis 
+              type="number" 
+              domain={['dataMin - 0.5', 'dataMax + 0.5']} 
+              unit="s"
+              tickFormatter={(value) => value.toFixed(4)} 
+            />
+            <YAxis 
+              dataKey="nombre" 
+              type="category" 
+              tickFormatter={(nombre) => nombre.length > 13 ? nombre.slice(0, 13) + '…' : nombre} 
+            />
+            <Tooltip />
             <Bar 
               dataKey="tiempoPromedio" 
               fill="#3b82f6" 
