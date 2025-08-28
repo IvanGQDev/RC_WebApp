@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getUsuarios, formatearUsuariosTabla } from "../services/userService";
-import { User, UserCircle2, Users, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { User, UserCircle2, Users, Search, ChevronLeft, ChevronRight, Copy } from "lucide-react";
 import PersonDetail from "./PersonDetail";
+import IdCell from "./IdCell";
 
 const genderIcon = (genero) => {
   switch ((genero || "").toLowerCase()) {
@@ -130,6 +131,7 @@ const PeopleTable = () => {
             <tr>
               <th className="px-6 py-3 text-left">Género</th>
               <th className="px-6 py-3 text-left">Nombres</th>
+              <th className="px-6 py-3 text-left">Id</th>
               <th className="px-6 py-3 text-right">Puntos</th>
               <th className="px-6 py-3 text-left">Status</th>
               <th className="px-6 py-3 text-center">Acciones</th>
@@ -143,13 +145,18 @@ const PeopleTable = () => {
                     {genderIcon(p.genero)}
                   </div>
                 </td>
-                <td className="px-6 py-4 font-medium text-gray-900">{p.nombres}</td>
+                <td className="px-6 py-4">
+                  {p.nombres}
+                </td>
+                <td className="px-6 py-4 flex items-center gap-2">
+                  <IdCell id={p.id} />
+                </td>
                 <td className="px-6 py-4 text-right font-semibold">{p.puntos}</td>
                 <td className="px-6 py-4">{statusPill(p.status)}</td>
-                <td className="px-6 py-4 text-center">
+                <td className="px-6 py-4 text-center gap-1 flex justify-center">
                   <button
                     onClick={() => setSelectedPerson(p)}
-                    className="px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl shadow-md hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
+                    className="px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
                   >
                     Detalles
                   </button>

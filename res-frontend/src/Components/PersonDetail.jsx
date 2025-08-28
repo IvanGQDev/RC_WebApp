@@ -46,6 +46,7 @@ const PersonDetail = ({ person, onBack }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <InfoCard icon={User} label="Género" value={person.genero} bg="blue" />
         <InfoCard icon={IdCard} label="Nombre" value={person.nombre} bg="purple" />
+        <InfoCard icon={FileText} label="ID" value={person.id} bg="yellow" />
         <InfoCard
           icon={BarChart2}
           label="Puntos Totales"
