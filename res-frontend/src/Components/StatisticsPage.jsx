@@ -15,7 +15,7 @@ const StatisticsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/usuarios");
+        const res = await axios.get("https://api-ig4jmd5a5q-uc.a.run.app/usuarios");
         const statsData = calcularEstadisticasUsuarios(res.data);
         setData(statsData);
       } catch (err) {

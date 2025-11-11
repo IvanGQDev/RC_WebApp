@@ -10,17 +10,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-initializeApp({ projectId: "demo-project" }); 
+process.env.FIRESTORE_EMULATOR_HOST = "127.0.0.1:8080";
+
+initializeApp({ projectId: "demo-project" });
 const db = getFirestore();
 
-db.settings({
-  host: "127.0.0.1:8080",
-  ssl: false
-});
-console.log("🔥 Conectado a Firestore Emulator");
+console.log("✅ Conectado al Firestore Emulator (127.0.0.1:8080)");
 
 app.get("/", (req, res) => {
-  res.send("API funcionando en local 🚀");
+  res.send("API funcionando en local");
 });
 
 app.get("/usuarios", async (req, res) => {

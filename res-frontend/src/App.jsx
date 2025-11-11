@@ -1,7 +1,3 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import UserForm from './UserForm'
-import ListaUsuarios from './ListaUsuarios'
 import React from 'react'
 import Login from "./Components/Login.jsx"
 import Dashboard from "./Components/Dashboard.jsx"
@@ -25,12 +21,6 @@ function App() {
       ) : (
         <Login setIsLoggedIn={setIsLoggedIn} />
       )}
-
-      {/*
-      <UserForm />
-      <ListaUsuarios />
-      */}
-      
     </>
   )
 }

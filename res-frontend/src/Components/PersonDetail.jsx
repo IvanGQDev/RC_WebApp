@@ -32,7 +32,7 @@ const PersonDetail = ({ person, onBack }) => {
         </button>
         <div>
           <h2 className="text-2xl font-bold text-gray-800 leading-tight">
-            {person.nombre} {person.nombre}
+            {person.nombre} 
           </h2>
           <p className="text-sm text-gray-500">Detalles de usuario</p>
         </div>
